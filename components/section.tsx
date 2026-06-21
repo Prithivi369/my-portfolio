@@ -7,9 +7,10 @@ interface SectionProps {
   children: React.ReactNode;
   className?: string;
   as?: "section" | "div" | "footer";
+  id?: string;
 }
 
-export function Section({ children, className = "", as = "section" }: SectionProps) {
+export function Section({ children, className = "", as = "section", id }: SectionProps) {
   const [reduceMotion, setReduceMotion] = useState(false);
 
   useEffect(() => {
@@ -23,11 +24,12 @@ export function Section({ children, className = "", as = "section" }: SectionPro
 
   if (reduceMotion) {
     const Tag = as;
-    return <Tag className={className}>{children}</Tag>;
+    return <Tag id={id} className={className}>{children}</Tag>;
   }
 
   return (
     <Component
+      id={id}
       className={className}
       initial={{ opacity: 0, y: 12 }}
       whileInView={{ opacity: 1, y: 0 }}
